@@ -87,4 +87,7 @@ class CPU:
             operand_a = self.ram_read(self.pc + 1)
             operand_b = self.ram_read(self.pc + 2)
 
+            elif IR == 0b00000001:
+                running = False
+
         # pass
