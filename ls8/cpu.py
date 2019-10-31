@@ -12,6 +12,17 @@ class CPU:
         self.register = [0] * 8
         self.pc = 0
 
+    # ram_read() should accept the address to read and return the value stored there.
+    def ram_read(self, address):
+        return self.ram[address]
+
+    #ram_write()` should accept a value to write, and the address to write it to.
+
+    def ram_write(self, value, address):
+        self.ram[address] = value
+
+
+
     def load(self):
         """Load a program into memory."""
 
