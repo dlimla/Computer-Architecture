@@ -9,7 +9,7 @@ class CPU:
         """Construct a new CPU."""
         # pass
         self.ram = [0] * 256
-        self.register = [0] * 8
+        self.reg = [0] * 8
         self.pc = 0
 
     # ram_read() should accept the address to read and return the value stored there.
@@ -17,7 +17,6 @@ class CPU:
         return self.ram[address]
 
     #ram_write()` should accept a value to write, and the address to write it to.
-
     def ram_write(self, value, address):
         self.ram[address] = value
 
@@ -32,12 +31,12 @@ class CPU:
 
         program = [
             # From print8.ls8
-            0b10000010, # LDI R0,8
-            0b00000000,
-            0b00001000,
-            0b01000111, # PRN R0
-            0b00000000,
-            0b00000001, # HLT
+            0b10000010, # LDI R0,8  130
+            0b00000000, #           0
+            0b00001000, #           8
+            0b01000111, # PRN R0    71
+            0b00000000, #           0
+            0b00000001, # HLT       1
         ]
 
         for instruction in program:
@@ -76,4 +75,16 @@ class CPU:
 
     def run(self):
         """Run the CPU."""
-        pass
+        # It needs to read the memory address that’s stored in register PC, and store that result in IR, the Instruction Register. This can just be a local variable in run().
+        running = True
+
+        while running:
+            print('running!')
+            IR = self.ram[self.pc]
+            # running = False
+            # return IR
+            # Using ram_read(), read the bytes at PC+1 and PC+2 from RAM into variables operand_a and operand_b in case the instruction needs them.
+            operand_a = self.ram_read(self.pc + 1)
+            operand_b = self.ram_read(self.pc + 2)
+
+        # pass
