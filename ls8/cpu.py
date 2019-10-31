@@ -93,7 +93,7 @@ class CPU:
             elif IR == 0b00000001:
                 running = False
             elif IR == 0b01000111:
-                print(self.reg[operand_a])
+                print(self.reg[operand_a]) 
                 self.pc += 2
 
         # pass
