@@ -29,15 +29,15 @@ class CPU:
 
         # For now, we've just hardcoded a program:
 
-        program = [
-            # From print8.ls8
-            0b10000010, # LDI R0,8  130
-            0b00000000, #           0
-            0b00001000, #           8
-            0b01000111, # PRN R0    71
-            0b00000000, #           0
-            0b00000001, # HLT       1
-        ]
+        # program = [
+        #     # From print8.ls8
+        #     0b10000010, # LDI R0,8  130
+        #     0b00000000, #           0
+        #     0b00001000, #           8
+        #     0b01000111, # PRN R0    71
+        #     0b00000000, #           0
+        #     0b00000001, # HLT       1
+        # ]
 
         for instruction in program:
             self.ram[address] = instruction
@@ -80,6 +80,7 @@ class CPU:
 
         while running:
             print('running!')
+            # self.trace()
             IR = self.ram[self.pc]
             # running = False
             # return IR
@@ -93,7 +94,7 @@ class CPU:
             elif IR == 0b00000001:
                 running = False
             elif IR == 0b01000111:
-                print(self.reg[operand_a]) 
+                print(self.reg[operand_a])
                 self.pc += 2
 
         # pass
