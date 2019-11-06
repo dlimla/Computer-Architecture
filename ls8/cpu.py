@@ -118,13 +118,8 @@ class CPU:
                 print(self.reg[operand_a])
                 self.pc += 2
             elif IR == PUSH:
-                reg_address = self.ram[self.pc + 1]
+                    reg_address = self.ram[self.pc + 1]
                 self.sp -= 1
                 value = self.reg[reg_address]
                 self.ram[self.sp] = value
-            elif IR == POP:
-                pop_value = self.ram[self.sp]
-                reg_address = self.ram[self.pc + 1]
-                self.reg[reg_address] = pop_value
-                self.sp += 1
         # pass
