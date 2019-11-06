@@ -11,6 +11,7 @@ class CPU:
         self.ram = [0] * 256
         self.reg = [0] * 8
         self.pc = 0
+        self.sp = 244
 
     # ram_read() should accept the address to read and return the value stored there.
     def ram_read(self, address):
@@ -49,6 +50,7 @@ class CPU:
                         num = line.split('#')[0].strip()
                         self.ram[address] = int(num, 2)
                         address += 1
+                        # print(self.ram)
         except FileNotFoundError:
             print(f"{sys.argv[0]}: {sys.argv[1]} Not Found")
             sys.exit(2)
@@ -92,9 +94,10 @@ class CPU:
         PRN = 0b01000111
         HLT = 0b00000001
         MUL = 0b10100010
-
+        POP = 0b01000110
+        PUSH = 0b01000101
         while running:
-            print('running!')
+            # print('running!')
             # self.trace()
             IR = self.ram[self.pc]
             # running = False
@@ -114,5 +117,14 @@ class CPU:
             elif IR == PRN:
                 print(self.reg[operand_a])
                 self.pc += 2
-
+            elif IR == PUSH:
+                reg_address = self.ram[self.pc + 1]
+                self.sp -= 1
+                value = self.reg[reg_address]
+                self.ram[self.sp] = value
+            elif IR == POP:
+                pop_value = self.ram[self.sp]
+                reg_address = self.ram[self.pc + 1]
+                self.reg[reg_address] = pop_value
+                self.sp += 1
         # pass
